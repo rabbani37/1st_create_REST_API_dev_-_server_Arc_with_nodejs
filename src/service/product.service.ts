@@ -9,3 +9,7 @@ export const readProduct = () => {
     const products = fs.readFileSync(dbFilePath, "utf-8")
     return JSON.parse(products)
 }
+
+export const writeProduct = (payload: any) => {
+    fs.writeFileSync(dbFilePath, JSON.stringify(payload))
+}
