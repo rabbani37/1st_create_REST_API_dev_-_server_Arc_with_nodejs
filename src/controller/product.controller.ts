@@ -1,19 +1,18 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
+import { readProduct } from "../service/product.service";
 
-const products = [
-    { pid: 101, name: "Smart watch 22A" },
-    { pid: 102, name: "Smart TV" },
-    { pid: 103, name: "mobile phone" }
-]
+
 
 export const productController = (req: IncomingMessage, res: ServerResponse) => {
     const url = req.url
+  
     const method = req.method
-
-
+    // GET All product
     if (url === "/products" && method === "GET") {
+        const products = readProduct()
         res.writeHead(200, { "content-type": "application/json" })
-        res.end(JSON.stringify({ message: "This is Products data", data:  }))
-
+        res.end(JSON.stringify({ message: "This is Products data", data: products }))
     }
+   
+
 }
